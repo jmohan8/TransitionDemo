@@ -1,12 +1,16 @@
 package com.example.transitiondemo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.Transition
 import android.transition.TransitionManager
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.BounceInterpolator
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_transition_demo.*
+
 
 class TransitionDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +23,10 @@ class TransitionDemoActivity : AppCompatActivity() {
     }
 
     private fun handleTouch() {
+        val changeBounds = ChangeBounds()
+        changeBounds.duration = 3000
+        changeBounds.interpolator = BounceInterpolator()
+        TransitionManager.beginDelayedTransition(myLayout, changeBounds)
         TransitionManager.beginDelayedTransition(myLayout)
         myButton.minWidth = 500
         myButton.minHeight = 350
